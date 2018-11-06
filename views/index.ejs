@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
+</head>
+<body>
+  <div class="row col-10 mx-auto">
+    <h1 class="col-10">Dojo Secrets</h1>
+    <h4 class="col-2 text-right"><a href="/logout">Logout</a></h4>
+  </div>
+  <%= secrets %>
+  <div class="card col-10 mx-auto my-3 p-0">
+    <div class="card-header">Create a secret</div>
+    <form class="card-body" action="/secrets/" method="post">
+      Secret
+      <input type="text" name="content" class="form-control" id="">
+      <input type="submit" value="SUBMIT">
+    </form>
+  </div>
+
+  <div class="card col-10 mx-auto p-0">
+    <div class="card-header">All the secrets</div>
+    <ul class="list-group">
+      <% secrets.forEach(secret => { %>
+      <li class="list-group-item">
+        <p><a href="/secrets/<%= secret.id %>"><%= secret.content %></a></p>
+        <% if (secret.userId == selfId) { %><a href="/secrets/delete/<%= secret.id %>">Delete</a><% } %>
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+</html>
